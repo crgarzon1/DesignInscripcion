@@ -1,0 +1,91 @@
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.div-reducido {
+	box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+	width: 100%;
+	margin: auto;
+	height: 100vh;
+	background: #ffffff !important;
+}
+
+@media screen and (max-width: 800px) {
+	/*pequeño*/
+	// .div-fullscreen {
+	// 	padding-top: 3%;
+	// 	padding-bottom: 3%;
+	// }
+
+	.div-complete {
+		box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+		height: 100%;
+		width: 100%;
+		margin: auto;
+	}
+
+	.btn-dark {
+		color: #ffc107;
+		font-size: 16px;
+		margin-top: 10px;
+		margin-left: 5.5%;
+		padding-left: 8px;
+	}
+
+	.btn-close {
+		color: #ffc107;
+		font-size: 16px;
+		float: right;
+		margin-right: calc(5.5% - 12px);
+		margin-top: 10px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.div-complete {
+		box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+		height: 100%;
+		width: 100%;
+		margin: auto;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	/* Grande */
+	// .div-fullscreen {
+	// 	padding-top: 4%;
+	// 	padding-bottom: 3%;
+	// }
+
+	.body-complete {
+		background: #ffffff url("../assets/fondogris.svg") no-repeat center;
+	}
+
+	.body-complete-dark {
+		background: #121212 url("../assets/fondogris.svg") no-repeat center;
+	}
+
+	.div-complete {
+		box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;
+		height: 100%;
+		width: 100%;
+		margin: auto;
+	}
+
+	.btn-dark {
+		color: #ffc107;
+		font-size: 16px;
+		margin-top: 5px;
+		margin-left: 5px;
+		padding-left: 8px;
+	}
+
+	.btn-close {
+		color: #ffc107;
+		font-size: 16px;
+		float: right;
+		margin-right: 5px;
+		margin-top: 5px;
+	}
+}
