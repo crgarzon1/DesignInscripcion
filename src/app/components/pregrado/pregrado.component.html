@@ -106,17 +106,17 @@
 								</mat-error>
 							</mat-form-field>
 
-							<mat-form-field class="campoTexto tipo-doc">
-								<mat-label [ngClass]="darkMode ? 'mat-label-style-dark' : 'mat-label-style-ligth'">Indicativo</mat-label>
+							<!--	<mat-form-field class="campoTexto tipo-doc">
+									<mat-label [ngClass]="darkMode ? 'mat-label-style-dark' : 'mat-label-style-ligth'">Indicativo</mat-label>
 								<mat-select [ngClass]="darkMode ? 'input-style-dark' : ''" matInput formControlName="tipoDocumentoSelected">
 									<mat-option *ngFor="let tipoDoc of tiposDocumento" [value]="tipoDoc.codigo">
-										{{ "+57" }}
+											{{ "+57" }}
 									</mat-option>
 								</mat-select>
 								<mat-icon matSuffix [ngClass]="darkMode ? 'style-icons-dark' : 'style-icons'">keyboard_arrow_right</mat-icon>
-							</mat-form-field>
+							</mat-form-field>-->
 
-							<mat-form-field class="campoTexto documento">
+							<mat-form-field class="campoTexto">
 								<mat-label [ngClass]="darkMode ? 'mat-label-style-dark' : 'mat-label-style-ligth'">Número de celular *</mat-label>
 								<input [ngClass]="darkMode ? 'input-style-dark' : ''" matInput formControlName="celular" />
 								<mat-icon matSuffix [ngClass]="darkMode ? 'style-icons-dark' : 'style-icons'">smartphone</mat-icon>
