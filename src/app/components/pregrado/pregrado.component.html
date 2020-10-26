@@ -152,7 +152,7 @@
 									[value]="progSelected"
 								>
 									<mat-option *ngFor="let prog of programs" [value]="prog.codigo + prog.jornada" class="opciones">
-										{{ prog.nombre | titlecase }} ({{ prog.jornada == "D" ? "Diurno" : "Nocturno" }})
+										{{ prog.nombre | titlecase }} ({{ prog.jornadaMostrar }})
 									</mat-option>
 								</mat-select>
 								<mat-icon matSuffix [ngClass]="darkMode ? 'style-icons-dark' : 'style-icons'">school</mat-icon>

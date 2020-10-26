@@ -5,6 +5,7 @@ export class Programa {
 	public nombre: string;
 	public jornadas: jornad[];
 	public jornada: string;
+	public jornadaMostrar: string;
 	public inscripcion: string;
 	public contacto: string;
 	public correo: string;
