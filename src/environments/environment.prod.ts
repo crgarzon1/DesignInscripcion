@@ -1,7 +1,7 @@
 export const environment = {
 	production: true,
 	siteKey: "6LcLgzEUAAAAAEW_qzzLErRbf_6CicDG7ExEjzQc",
-	///urlBackend: "https://jupiter.lasalle.edu.co:8181/admisiones-backend/oar/", //(Preproduccion)
+	//urlBackend: "https://jupiter.lasalle.edu.co:8181/admisiones-backend/oar/", //(Preproduccion)
 	//urlBackend: "http://vili.lasalle.edu.co:8082/admisiones-backend/oar/",
 	//urlBackend: "http://estctiedarevalo.lasalle.edu.co:8080/admisiones-backend/oar/", //(Local)
 	urlBackend: "https://tigris.lasalle.edu.co/admisiones-backend/oar/", //(Produccion)

@@ -267,6 +267,22 @@ export class PregradoComponent implements OnInit {
 			}
 			return 0;
 		});
+		for (let i = 0; i < this.programs.length; i++) {
+			if (
+				this.programs[i].codigo == "39" ||
+				this.programs[i].codigo == "19" ||
+				this.programs[i].codigo == "38" ||
+				this.programs[i].codigo == "MD" ||
+				this.programs[i].codigo == "MG"
+			) {
+				this.programs[i].jornadaMostrar = "Virtual";
+			} else if (this.programs[i].jornada == "D") {
+				this.programs[i].jornadaMostrar = "Diurno";
+			} else if (this.programs[i].jornada == "N") {
+				this.programs[i].jornadaMostrar = "Nocturno";
+			}
+		}
+
 		this.progress = false;
 	}
 
@@ -276,6 +292,7 @@ export class PregradoComponent implements OnInit {
 				codigo: "1",
 				nombre: "DOCTORADO EN AGROCIENCIAS",
 				jornada: "N",
+				jornadaMostrar: "N",
 				inscripcion: "S",
 				jornadas: [],
 				contacto: null,
@@ -286,6 +303,7 @@ export class PregradoComponent implements OnInit {
 				codigo: "2",
 				nombre: "DOCTORADO EN EDUCACIÓN",
 				jornada: "N",
+				jornadaMostrar: "N",
 				inscripcion: "S",
 				jornadas: [],
 				contacto: null,
@@ -296,6 +314,7 @@ export class PregradoComponent implements OnInit {
 				codigo: "3",
 				nombre: "DOCTORADO EN ESTUDIOS DE DESARROLLO Y TERRITORIO",
 				jornada: "N",
+				jornadaMostrar: "N",
 				inscripcion: "S",
 				jornadas: [],
 				contacto: null,
@@ -311,6 +330,7 @@ export class PregradoComponent implements OnInit {
 				this.programs.push({
 					nombre: program.nombre,
 					jornada: jornad.jornada,
+					jornadaMostrar: "",
 					codigo: program.codigo,
 					inscripcion: jornad.inscripcion,
 					jornadas: [],
@@ -339,6 +359,7 @@ export class PregradoComponent implements OnInit {
 		} else {
 			this.registrarInscripcionForm.controls.terminos.setValue(false);
 			var prog = this.registrarInscripcionForm.controls.programaSelected.value;
+			console.log(this.registrarInscripcionForm.controls.programaSelected.value);
 			this.getProgramaSeleccionado(prog);
 			var cookieLs = this.cookieService.get(environment.cookieLeadSource).toString();
 			this.pregradoServ.guardarParte1(this.registrarInscripcionForm, this.programaSelected, respCaptcha, cookieLs).subscribe(
