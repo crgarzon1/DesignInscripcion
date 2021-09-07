@@ -98,12 +98,12 @@ export class PregradoContinuarComponent implements OnInit {
 					this.progress = false;
 				},
 				() => {
-					this.sortProgramas();
+					this.sortProgramas(tipoPrograma);
 				}
 			);
 		} else {
 			this.setDoctorados();
-			this.sortProgramas();
+			this.sortProgramas("3");
 		}
 	}
 
@@ -159,11 +159,22 @@ export class PregradoContinuarComponent implements OnInit {
 				contacto: null,
 				fa: null,
 				correo: null
+			},
+			{
+				codigo: "4",
+				nombre: "DOCTORADO EN ADMINISTRACIÓN DE EMPRESAS - DBA",
+				jornada: "N",
+				jornadaMostrar: "N",
+				inscripcion: "S",
+				jornadas: [],
+				contacto: null,
+				fa: null,
+				correo: null
 			}
 		];
 	}
 
-	sortProgramas() {
+	sortProgramas(type: string) {
 		this.programs.sort((n1, n2) => {
 			var comp = (n1.nombre + n1.jornada).localeCompare(n2.nombre + n2.jornada);
 			if (comp > 1) {
@@ -174,21 +185,28 @@ export class PregradoContinuarComponent implements OnInit {
 			}
 			return 0;
 		});
-		for (let i = 0; i < this.programs.length; i++) {
-			if (
-				this.programs[i].codigo == "39" ||
-				this.programs[i].codigo == "19" ||
-				this.programs[i].codigo == "38" ||
-				this.programs[i].codigo == "MD" ||
-				this.programs[i].codigo == "MG"
-			) {
-				this.programs[i].jornadaMostrar = "Virtual";
-			} else if (this.programs[i].jornada == "D") {
-				this.programs[i].jornadaMostrar = "Diurno";
-			} else if (this.programs[i].jornada == "N") {
-				this.programs[i].jornadaMostrar = "Nocturno";
+		if (type !== "2") {
+			for (let i = 0; i < this.programs.length; i++) {
+				if (
+					this.programs[i].codigo == "39" ||
+					this.programs[i].codigo == "19" ||
+					this.programs[i].codigo == "38" ||
+					this.programs[i].codigo == "MD" ||
+					this.programs[i].codigo == "MG"
+				) {
+					this.programs[i].jornadaMostrar = "Virtual";
+				} else if (this.programs[i].jornada == "D") {
+					this.programs[i].jornadaMostrar = "Diurno";
+				} else if (this.programs[i].jornada == "N") {
+					this.programs[i].jornadaMostrar = "Nocturno";
+				}
+			}
+		} else {
+			for (let i = 0; i < this.programs.length; i++) {
+				this.programs[i].jornadaMostrar = "";
 			}
 		}
+
 		this.progress = false;
 	}
 

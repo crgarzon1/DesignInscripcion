@@ -435,6 +435,10 @@
 	color: #ffffff99 !important;
 }
 
+::ng-deep .mat-select-panel {
+	min-width: 100% !important;
+}
+
 ::ng-deep
 	.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
 	.mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty)

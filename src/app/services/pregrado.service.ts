@@ -48,6 +48,9 @@ export class PregradoService {
 				case "3":
 					vDoc = "ET";
 					break;
+				case "4":
+					vDoc = "AD";
+					break;
 			}
 			urlC = environment.urlBackend + documento + "/" + vDoc + "/" + programa[1] + "/continuar.json";
 		} else {
@@ -72,7 +75,18 @@ export class PregradoService {
 				tipoPrograma = "1";
 			}
 		} else {
-			programa = inter.controls.programaSelected.value.substring(0, 1) == "1" ? "DA" : "DE";
+			const doctorado = inter.controls.programaSelected.value.substring(0, 1);
+			tipoPrograma = "2";
+			if (doctorado == "1") {
+				programa = "DA";
+			} else if (doctorado == "2") {
+				programa = "DE";
+			} else if (doctorado == "3") {
+				programa = "ET";
+			} else if (doctorado == "4") {
+				programa = "AD";
+			}
+
 			jornada = inter.controls.programaSelected.value.substring(1, 2);
 		}
 		let nombres = inter.controls.primerNombre.value.trim().split(" ");
@@ -84,7 +98,9 @@ export class PregradoService {
 		let primerApellido = apellidos[0];
 		apellidos.splice(0, 1);
 		let segundoApellido = apellidos.join(" ");
-
+		if (tipo == "3") {
+			tipoPrograma = "2";
+		}
 		var interesado = {
 			primerNombre: primerNombre
 				.toUpperCase()

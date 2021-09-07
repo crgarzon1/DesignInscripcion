@@ -163,12 +163,12 @@ export class PregradoComponent implements OnInit {
 				},
 				(error) => {},
 				() => {
-					this.sortProgramas();
+					this.sortProgramas(tipoPrograma);
 				}
 			);
 		} else {
 			this.setDoctorados();
-			this.sortProgramas();
+			this.sortProgramas("3");
 		}
 	}
 
@@ -193,7 +193,7 @@ export class PregradoComponent implements OnInit {
 					this.registrarInscripcionForm.controls.programaSelected.setValue(this.progSelected);
 					this.registrarInscripcionForm.controls.tipoSelected.setValue("1");
 					this.tipSelected = "1";
-					this.sortProgramas();
+					this.sortProgramas("1");
 				} else {
 					this.getProgramaPosgrado(programa, jornada);
 				}
@@ -220,7 +220,7 @@ export class PregradoComponent implements OnInit {
 					this.registrarInscripcionForm.controls.programaSelected.setValue(this.progSelected);
 					this.registrarInscripcionForm.controls.tipoSelected.setValue("2");
 					this.tipSelected = "2";
-					this.sortProgramas();
+					this.sortProgramas("2");
 				} else {
 					this.getProgramaDoctorado(programa, jornada);
 				}
@@ -248,15 +248,20 @@ export class PregradoComponent implements OnInit {
 			this.registrarInscripcionForm.controls.tipoSelected.setValue("3");
 			this.progSelected = "ETN";
 			this.tipSelected = "3";
+		} else if (programa == "AD") {
+			this.registrarInscripcionForm.controls.programaSelected.setValue("4N");
+			this.registrarInscripcionForm.controls.tipoSelected.setValue("3");
+			this.progSelected = "ADN";
+			this.tipSelected = "3";
 		} else {
 			this.progSelected = null;
 			this.tipSelected = null;
 			this.programs = [];
 		}
-		this.sortProgramas();
+		this.sortProgramas("3");
 	}
 
-	sortProgramas() {
+	sortProgramas(type: string) {
 		this.programs.sort((n1, n2) => {
 			var comp = (n1.nombre + n1.jornada).localeCompare(n2.nombre + n2.jornada);
 			if (comp > 1) {
@@ -267,19 +272,25 @@ export class PregradoComponent implements OnInit {
 			}
 			return 0;
 		});
-		for (let i = 0; i < this.programs.length; i++) {
-			if (
-				this.programs[i].codigo == "39" ||
-				this.programs[i].codigo == "19" ||
-				this.programs[i].codigo == "38" ||
-				this.programs[i].codigo == "MD" ||
-				this.programs[i].codigo == "MG"
-			) {
-				this.programs[i].jornadaMostrar = "Virtual";
-			} else if (this.programs[i].jornada == "D") {
-				this.programs[i].jornadaMostrar = "Diurno";
-			} else if (this.programs[i].jornada == "N") {
-				this.programs[i].jornadaMostrar = "Nocturno";
+		if (type !== "2") {
+			for (let i = 0; i < this.programs.length; i++) {
+				if (
+					this.programs[i].codigo == "39" ||
+					this.programs[i].codigo == "19" ||
+					this.programs[i].codigo == "38" ||
+					this.programs[i].codigo == "MD" ||
+					this.programs[i].codigo == "MG"
+				) {
+					this.programs[i].jornadaMostrar = "Virtual";
+				} else if (this.programs[i].jornada == "D") {
+					this.programs[i].jornadaMostrar = "Diurno";
+				} else if (this.programs[i].jornada == "N") {
+					this.programs[i].jornadaMostrar = "Nocturno";
+				}
+			}
+		} else {
+			for (let i = 0; i < this.programs.length; i++) {
+				this.programs[i].jornadaMostrar = "";
 			}
 		}
 
@@ -313,6 +324,17 @@ export class PregradoComponent implements OnInit {
 			{
 				codigo: "3",
 				nombre: "DOCTORADO EN ESTUDIOS DE DESARROLLO Y TERRITORIO",
+				jornada: "N",
+				jornadaMostrar: "N",
+				inscripcion: "S",
+				jornadas: [],
+				contacto: null,
+				fa: null,
+				correo: null
+			},
+			{
+				codigo: "4",
+				nombre: "DOCTORADO EN ADMINISTRACIÓN DE EMPRESAS - DBA",
 				jornada: "N",
 				jornadaMostrar: "N",
 				inscripcion: "S",
@@ -376,6 +398,8 @@ export class PregradoComponent implements OnInit {
 						this.openMensajes("Un momento por favor...", this.mensaje.mensaje, 0);
 						this.redireccionarLineaTiempo();
 					} else if (this.mensaje.status == "fail") {
+						var tipDoc = this.registrarInscripcionForm.controls.tipoDocumentoSelected.value;
+						this.openGracias(tipDoc);
 						this.openMensajes("Mensaje importante", this.mensaje.mensaje, 0);
 					} else {
 						//TODO: Si es un programa especial deberia tambien abrir la pantalla de gracias
@@ -455,8 +479,8 @@ export class PregradoComponent implements OnInit {
 		} else if (tipo == "2") {
 			var datosPos = {
 				doc: documento,
-				fac: programa.substring(0, 2),
-				jor: programa.substring(2, 3)
+				fac: programa.substring(0, 2)
+				//	jor: programa.substring(2, 3)
 			};
 			this.cookieService.set(environment.cookiePosgrado, JSON.stringify(datosPos), 15 / 1440, "/", environment.dominio);
 			if (this.formReducido) {
